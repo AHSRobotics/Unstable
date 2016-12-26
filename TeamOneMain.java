@@ -53,3 +53,7 @@ public class TeamOneMain extends LinearOpMode{
         }
     }
 }
+
+/* TODO
+* Ask Jeff if he wants to add a killswitch to the bot, the same one that is in Kyles code
+*/

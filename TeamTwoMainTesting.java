@@ -1,7 +1,7 @@
 // This is basically a rewrite of TeleOpTutorial.java written from what I can remember
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode; // Importing
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
@@ -10,7 +10,7 @@ import java.util.InputMismatchException;
 
 @TeleOp(name = "Team Two 0.4.0", group = "Unstable Test") // The name and group that should show up on the driver station
 
-public class FirstOpMode extends LinearOpMode{
+public class TeamTwoMainTesting extends LinearOpMode{
 
     /* Creating variables with the access modifier of private and of type DcMotor */
     DcMotor motorLeft;
