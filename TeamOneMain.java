@@ -1,18 +1,15 @@
-// This is basically a rewrite of TeleOpTutorial.java written from what I can remember
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-
 import java.util.InputMismatchException;
-/* import com.qualcomm.robotcore.hardware.DcMotorSimple; */
 
-@TeleOp(name = "Team Two 0.4.0", group = "Unstable Test") // The name and group that should show up on the driver station
 
-public class TeamTwoMainTesting extends LinearOpMode{
+@TeleOp(name = "Team One 0.4.0", group = "Unstable Test") 
 
-    /* Creating variables with the access modifier of private and of type DcMotor */
+public class TeamOneMain extends LinearOpMode{
+    
     DcMotor motorLeft;
     DcMotor motorRight;
     DcMotor motorMiddle;
@@ -24,7 +21,7 @@ public class TeamTwoMainTesting extends LinearOpMode{
     private DcMotor[] allMotors = {motorLeft, motorRight, motorMiddle, motorPoker, motorLoader};
 
     @Override
-    public void runOpMode() throws InterruptedException { // The method that is called once the Op Mode is selected
+    public void runOpMode() throws InterruptedException { /
 
         // Initialization
         motorLeft = hardwareMap.dcMotor.get("motorLeft"); // Need to name the motor this in the configuration on the phone
