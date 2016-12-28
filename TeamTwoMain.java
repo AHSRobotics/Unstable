@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import java.util.InputMismatchException;
 
-@TeleOp(name = "Team One 0.1.0", group = "Unstable Test")
+@TeleOp(name = "Team Two 0.1.0", group = "Unstable Test")
 
-public class TeamOneMain extends LinearOpMode{
+public class TeamTwoMain extends LinearOpMode{
     DcMotor motorLeft;
     DcMotor motorRight;
     DcMotor sweeper;
