@@ -18,7 +18,7 @@ public class TeamOneMain extends LinearOpMode{
 
     final double INCREMENTER = 0.01;
     private boolean killSwitch = false;
-    private DcMotor[] allMotors = {motorLeft, motorRight, motorMiddle, motorPoker, motorLoader};
+    private DcMotor[] allMotors = {motorLeft, motorRight, motorMiddle, motorPoker};
 
     @Override
     public void runOpMode() throws InterruptedException { /
