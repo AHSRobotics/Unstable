@@ -14,7 +14,7 @@ public class TeamOneMain extends LinearOpMode{
     DcMotor motorRight;
     DcMotor motorMiddle;
     DcMotor motorPoker;
-    DcMotor motorLoader;
+    // DcMotor motorLoader;
 
     final double INCREMENTER = 0.01;
     private boolean killSwitch = false;
@@ -36,9 +36,9 @@ public class TeamOneMain extends LinearOpMode{
         motorPoker = hardwareMap.dcMotor.get("motorPoker");
         printMessage("Poker Motor Stats: ", "GOOD");
 
-        motorLoader = hardwareMap.dcMotor.get("motorLoader");
+        /*motorLoader = hardwareMap.dcMotor.get("motorLoader");
         printMessage("Loader Motor Stats: ", "GOOD");
-
+        */
         motorRight.setDirection(DcMotor.Direction.REVERSE); // This is suppose to stop the bot from turning in circles because the motors by default run in opposite directions
 
         // Waiting for the okay from the driver
@@ -110,14 +110,14 @@ public class TeamOneMain extends LinearOpMode{
 
 
                 /* The Loader (button is subject to change) */
-                if (gamepad1.x) {
+                /*if (gamepad1.x) {
                     motorLoader.setPower(1.0);
                 }else{
                     motorLoader.setPower(0.0);
-                }
+                }*/
 
             }else{
-                printMessage("WARNING: ", "THE KILLSWITCH HAS BEEN ACTIVATE, ALL MOTORS STOP. DEACTIVATE KILLSWITCH TO CONTINUE DRIVING");
+                printMessage("WARNING: ", "THE KILLSWITCH HAS BEEN ACTIVATED, ALL MOTORS STOP. DEACTIVATE KILLSWITCH TO CONTINUE DRIVING");
             }
 
             /* Killswitch */
