@@ -5,11 +5,12 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
 import java.util.InputMismatchException;
 
-@TeleOp(name = "Team Two 0.1.0", group = "Unstable Test")
+@TeleOp(name = "Team Two 0.1.1", group = "Unstable Test")
 
 public class TeamTwoMain extends LinearOpMode{
     DcMotor motorLeft;
@@ -18,11 +19,16 @@ public class TeamTwoMain extends LinearOpMode{
 
     @Override
     public void runOpMode() throws InterruptedException{
-        motorLeft = hardwareMap.dcMotor.get("motorLeft");
-        motorRight = hardwareMap.dcMotor.get("motorRight");
+        motorLeft = hardwareMap.dcMotor.get("motorLeft"); // Need to name the motor this in the configuration on the phone
+        printMessage("Left Motor Stats: ", "GOOD");
+
+        motorRight = hardwareMap.dcMotor.get("motorRight"); // Same here
+        printMessage("Right Motor Stats: ", "GOOD");
+
         sweeper = hardwareMap.dcMotor.get("sweeper");
 
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
+        sweeper.setDirection(DcMotor.Direction.REVERSE);
 
         printMessage("> ", "Ready to start, Good Luck!");
 
@@ -31,6 +37,10 @@ public class TeamTwoMain extends LinearOpMode{
         while(opModeIsActive()){
             motorLeft.setPower(-gamepad1.left_stick_y);
             motorRight.setPower(-gamepad1.right_stick_y);
+
+            if(motorRight.getPower() == 1.0){
+                printMessage("Motor Right Status: ", Double.toString(1.0));
+            }
 
             /*TODO
             * Ask Jeff what buttons he wants for this robots sweeper control

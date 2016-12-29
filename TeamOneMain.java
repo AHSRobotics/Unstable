@@ -6,22 +6,21 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.InputMismatchException;
 
 
-@TeleOp(name = "Team One 0.4.0", group = "Unstable Test") 
+@TeleOp(name = "Team One 0.4.1", group = "Unstable Test")
 
 public class TeamOneMain extends LinearOpMode{
-    
+
     DcMotor motorLeft;
     DcMotor motorRight;
     DcMotor motorMiddle;
     DcMotor motorPoker;
-    // DcMotor motorLoader;
 
     final double INCREMENTER = 0.01;
     private boolean killSwitch = false;
     private DcMotor[] allMotors = {motorLeft, motorRight, motorMiddle, motorPoker};
 
     @Override
-    public void runOpMode() throws InterruptedException { /
+    public void runOpMode() throws InterruptedException {
 
         // Initialization
         motorLeft = hardwareMap.dcMotor.get("motorLeft"); // Need to name the motor this in the configuration on the phone
@@ -36,16 +35,13 @@ public class TeamOneMain extends LinearOpMode{
         motorPoker = hardwareMap.dcMotor.get("motorPoker");
         printMessage("Poker Motor Stats: ", "GOOD");
 
-        /*motorLoader = hardwareMap.dcMotor.get("motorLoader");
-        printMessage("Loader Motor Stats: ", "GOOD");
-        */
         motorRight.setDirection(DcMotor.Direction.REVERSE); // This is suppose to stop the bot from turning in circles because the motors by default run in opposite directions
 
         // Waiting for the okay from the driver
         printMessage("> ", "Ready to start, Good Luck!");
         waitForStart();
 
-       double middleSpeed = 0.0;
+        double middleSpeed = 0.0;
 
         while (opModeIsActive()) {
             if(!killSwitch) {
@@ -109,15 +105,10 @@ public class TeamOneMain extends LinearOpMode{
                 }
 
 
-                /* The Loader (button is subject to change) */
-                /*if (gamepad1.x) {
-                    motorLoader.setPower(1.0);
-                }else{
-                    motorLoader.setPower(0.0);
-                }*/
+
 
             }else{
-                printMessage("WARNING: ", "THE KILLSWITCH HAS BEEN ACTIVATED, ALL MOTORS STOP. DEACTIVATE KILLSWITCH TO CONTINUE DRIVING");
+                printMessage("WARNING: ", "THE KILLSWITCH HAS BEEN ACTIVATE, ALL MOTORS STOP. DEACTIVATE KILLSWITCH TO CONTINUE DRIVING");
             }
 
             /* Killswitch */
@@ -155,5 +146,4 @@ public class TeamOneMain extends LinearOpMode{
 * TODO
 * Test Killswitch
 * Add Drive Wheels + Loader Bar controller 1
-
 * */
