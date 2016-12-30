@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.InputMismatchException;
 
-@TeleOp(name = "Team Two 0.1.1", group = "Unstable Test")
+@TeleOp(name = "Team Two 0.2.0", group = "Unstable Test")
 
 public class TeamTwoMain extends LinearOpMode{
 
