@@ -1,30 +1,25 @@
 package org.firstinspires.ftc.teamcode;
 
-
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
-
 import java.util.InputMismatchException;
 
 @TeleOp(name = "Team Two 0.1.1", group = "Unstable Test")
 
 public class TeamTwoMain extends LinearOpMode{
+
     DcMotor motorLeft;
     DcMotor motorRight;
     DcMotor sweeper;
 
+    private boolean killSwitch = false;
+    private DcMotor[] allMotors = {motorLeft, motorRight, sweeper};
+
     @Override
     public void runOpMode() throws InterruptedException{
-        motorLeft = hardwareMap.dcMotor.get("motorLeft"); // Need to name the motor this in the configuration on the phone
-        printMessage("Left Motor Stats: ", "GOOD");
-
-        motorRight = hardwareMap.dcMotor.get("motorRight"); // Same here
-        printMessage("Right Motor Stats: ", "GOOD");
-
+        motorLeft = hardwareMap.dcMotor.get("motorLeft");
+        motorRight = hardwareMap.dcMotor.get("motorRight");
         sweeper = hardwareMap.dcMotor.get("sweeper");
 
         motorLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -35,18 +30,34 @@ public class TeamTwoMain extends LinearOpMode{
         waitForStart();
 
         while(opModeIsActive()){
-            motorLeft.setPower(-gamepad1.left_stick_y);
-            motorRight.setPower(-gamepad1.right_stick_y);
+            if(!killSwitch) {
+                motorLeft.setPower(-gamepad1.left_stick_y);
+                motorRight.setPower(-gamepad1.right_stick_y);
 
-            if(motorRight.getPower() == 1.0){
-                printMessage("Motor Right Status: ", Double.toString(1.0));
+                /* Controlling sweeper motor */
+                if (gamepad1.left_trigger > 0.0) {
+                    sweeper.setDirection(DcMotor.Direction.FORWARD); // Need to change direction based on button pressed
+                    sweeper.setPower(-gamepad1.left_trigger);
+                }
+
+                if (gamepad1.right_trigger > 0.0) {
+                    sweeper.setDirection(DcMotor.Direction.REVERSE);
+                    sweeper.setPower(-gamepad1.right_trigger);
+                }
+            }else{
+                printMessage("WARNING: ", "THE KILLSWITCH HAS BEEN ACTIVATE, ALL MOTORS STOP. DEACTIVATE KILLSWITCH TO CONTINUE DRIVING");
             }
 
-            /*TODO
-            * Ask Jeff what buttons he wants for this robots sweeper control
-            */
+            /* Killswitch */
+            if(gamepad1.back && gamepad1.start && gamepad1.a || gamepad2.back && gamepad2.start && gamepad2.a){
+                flipKillSwitch();
 
-            sweeper.setPower(-gamepad1.right_trigger);
+                for(DcMotor motor : this.allMotors){
+                    motor.setPower(0.0);
+                }
+            }
+
+            idle();
 
         }
 
@@ -62,8 +73,14 @@ public class TeamTwoMain extends LinearOpMode{
             telemetry.addData("WARNING: ", "A call to \"printMessage\" has an incorrect data type entered as one of the arguments. Talk to one of the programmers to fix the problem.");
         }
     }
+
+    public void flipKillSwitch(){
+        this.killSwitch = (this.killSwitch) ? false : true;
+    }
 }
 
+
+
 /* TODO
-* Ask Jeff if he wants to add a killswitch to the bot, the same one that is in Kyles code
+* Get things tested and ask if there is anything more
 */

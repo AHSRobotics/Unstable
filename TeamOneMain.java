@@ -15,29 +15,21 @@ public class TeamOneMain extends LinearOpMode{
     DcMotor motorMiddle;
     DcMotor motorPoker;
 
-    final double INCREMENTER = 0.01;
-    private boolean killSwitch = false;
-    private DcMotor[] allMotors = {motorLeft, motorRight, motorMiddle, motorPoker};
+    final double INCREMENTER = 0.01; // Used to control the strafing wheel
+    private boolean killSwitch = false; // Will determine if the motors will run
+    private DcMotor[] allMotors = {motorLeft, motorRight, motorMiddle, motorPoker}; // Used to shut down all of the motors
 
     @Override
     public void runOpMode() throws InterruptedException {
 
         // Initialization
-        motorLeft = hardwareMap.dcMotor.get("motorLeft"); // Need to name the motor this in the configuration on the phone
-        printMessage("Left Motor Stats: ", "GOOD");
-
-        motorRight = hardwareMap.dcMotor.get("motorRight"); // Same here
-        printMessage("Right Motor Stats: ", "GOOD");
-
+        motorLeft = hardwareMap.dcMotor.get("motorLeft");
+        motorRight = hardwareMap.dcMotor.get("motorRight");
         motorMiddle = hardwareMap.dcMotor.get("motorMiddle");
-        printMessage("Middle Motor Stats: ", "GOOD");
-
         motorPoker = hardwareMap.dcMotor.get("motorPoker");
-        printMessage("Poker Motor Stats: ", "GOOD");
 
-        motorRight.setDirection(DcMotor.Direction.REVERSE); // This is suppose to stop the bot from turning in circles because the motors by default run in opposite directions
+        motorRight.setDirection(DcMotor.Direction.REVERSE);
 
-        // Waiting for the okay from the driver
         printMessage("> ", "Ready to start, Good Luck!");
         waitForStart();
 
@@ -45,9 +37,9 @@ public class TeamOneMain extends LinearOpMode{
 
         while (opModeIsActive()) {
             if(!killSwitch) {
-                /* Main driving controls */
-                motorRight.setPower(-gamepad1.right_stick_y); // The left stick y axis controls the left motor
-                motorLeft.setPower(-gamepad1.left_stick_y); // The right stick y axis controls the right motor
+
+                motorRight.setPower(-gamepad1.right_stick_y);
+                motorLeft.setPower(-gamepad1.left_stick_y);
 
                 /* Middle Strafing Controls */
                 if (gamepad2.dpad_left) {
@@ -105,8 +97,6 @@ public class TeamOneMain extends LinearOpMode{
                 }
 
 
-
-
             }else{
                 printMessage("WARNING: ", "THE KILLSWITCH HAS BEEN ACTIVATE, ALL MOTORS STOP. DEACTIVATE KILLSWITCH TO CONTINUE DRIVING");
             }
@@ -145,5 +135,5 @@ public class TeamOneMain extends LinearOpMode{
 /*
 * TODO
 * Test Killswitch
-* Add Drive Wheels + Loader Bar controller 1
+* Add something that could mess around with servos
 * */
