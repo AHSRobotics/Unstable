@@ -112,7 +112,6 @@ public class TeamOneMain extends LinearOpMode{
                 }
             }
             /* The Sweeper */
-
             if(gamepad1.left_trigger > 0){
                 motorSweep.setPower(-gamepad1.left_trigger);
             }else if(gamepad1.right_trigger > 0){
