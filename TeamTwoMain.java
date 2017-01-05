@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.InputMismatchException;
 
-@TeleOp(name = "Team Two 0.2.2", group = "Unstable Test")
+@TeleOp(name = "Team Two 0.2.3", group = "Unstable Test")
 
 public class TeamTwoMain extends LinearOpMode{
 
@@ -39,6 +39,11 @@ public class TeamTwoMain extends LinearOpMode{
             if (gamepad1.right_trigger > 0.0) {
                 sweeper.setDirection(DcMotor.Direction.REVERSE);
                 sweeper.setPower(-gamepad1.right_trigger);
+            }
+
+            // Test to see if the dpad thing is just a werid bug caused by kill switch
+            if(gamepad1.dpad_left || gamepad1.dpad_right || gamepad1.dpad_up || gamepad1.dpad_down){
+                printMessage("> ", "If the robot is doing something now, there is a problem");
             }
 
             idle();

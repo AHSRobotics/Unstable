@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.InputMismatchException;
 
 
-@TeleOp(name = "Team One 0.4.3", group = "Unstable Test")
+@TeleOp(name = "Team One 0.4.4", group = "Unstable Test")
 
 public class TeamOneMain extends LinearOpMode{
 
@@ -16,8 +16,7 @@ public class TeamOneMain extends LinearOpMode{
     DcMotor motorLauncher;
 
     final double INCREMENTER = 0.01; // Used to control the strafing wheel
-
-
+    boolean change = false;
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -25,7 +24,7 @@ public class TeamOneMain extends LinearOpMode{
         motorLeft = hardwareMap.dcMotor.get("motorLeft");
         motorRight = hardwareMap.dcMotor.get("motorRight");
         motorMiddle = hardwareMap.dcMotor.get("motorMiddle");
-        motorLauncher = hardwareMap.dcMotor.get("motorSweep");
+        motorLauncher = hardwareMap.dcMotor.get("motorLauncher");
 
         motorRight.setDirection(DcMotor.Direction.REVERSE);
 
@@ -69,7 +68,7 @@ public class TeamOneMain extends LinearOpMode{
             }
 
 
-            /* The Sweeper */
+            /* The Launcher */
             if(gamepad2.right_trigger > 0)
                 motorLauncher.setPower(1.0);
             else if(gamepad2.right_trigger <= 0)
