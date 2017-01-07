@@ -6,17 +6,21 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import java.util.InputMismatchException;
 
 
-@TeleOp(name = "Team One 0.4.4", group = "Unstable Test")
+@TeleOp(name = "Team One 0.5.0", group = "Unstable Test")
 
 public class TeamOneMain extends LinearOpMode{
 
+    /*Movement Wheels*/
     DcMotor motorLeft;
     DcMotor motorRight;
     DcMotor motorMiddle;
+
+    /*Launcher*/
     DcMotor motorLauncher;
+    DcMotor motorLauncherTwo;
 
     final double INCREMENTER = 0.01; // Used to control the strafing wheel
-    boolean change = false;
+    final double FULL_POWER = 1.0;
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -25,6 +29,7 @@ public class TeamOneMain extends LinearOpMode{
         motorRight = hardwareMap.dcMotor.get("motorRight");
         motorMiddle = hardwareMap.dcMotor.get("motorMiddle");
         motorLauncher = hardwareMap.dcMotor.get("motorLauncher");
+        motorLauncherTwo = hardwareMap.dcMotor.get("motorLauncherTwo");
 
         motorRight.setDirection(DcMotor.Direction.REVERSE);
 
@@ -36,8 +41,8 @@ public class TeamOneMain extends LinearOpMode{
         while (opModeIsActive()) {
 
 
-            motorRight.setPower(-gamepad1.right_stick_y);
-            motorLeft.setPower(-gamepad1.left_stick_y);
+            motorRight.setPower(gamepad1.right_stick_y);
+            motorLeft.setPower(gamepad1.left_stick_y);
 
             /* Middle Strafing Controls */
             if (gamepad2.dpad_left) {
@@ -69,10 +74,14 @@ public class TeamOneMain extends LinearOpMode{
 
 
             /* The Launcher */
-            if(gamepad2.right_trigger > 0)
-                motorLauncher.setPower(1.0);
-            else if(gamepad2.right_trigger <= 0)
+            if(gamepad2.right_trigger > 0){
+                motorLauncher.setPower(-FULL_POWER);
+                motorLauncherTwo.setPower(-FULL_POWER);
+            }
+            else if(gamepad2.right_trigger <= 0) {
                 motorLauncher.setPower(0);
+                motorLauncherTwo.setPower(0);
+            }
 
             idle();
         }
@@ -93,6 +102,10 @@ public class TeamOneMain extends LinearOpMode{
 
 /*
 * TODO
-* Test Killswitch
-* Add something that could mess around with servos
+* Get the fifth motor working
 * */
+
+/*
+* NOTE
+* If there is an error with the code than it is probably with the motor
+* * */
